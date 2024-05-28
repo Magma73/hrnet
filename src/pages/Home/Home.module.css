@@ -1,0 +1,25 @@
+@import url('../../utils/colors.css');
+
+.container{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+.section{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 0px 20px;
+}
+.h1{
+    max-width: fit-content;
+    text-align:center;
+    font-size: 2em;
+    color: var(--color-h1);
+}
+.h2{
+    max-width: fit-content;
+    text-align:center;
+    font-size: 2em;
+    color: var(--color-h2);
+}
