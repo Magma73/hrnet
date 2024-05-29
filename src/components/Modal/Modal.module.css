@@ -1,4 +1,4 @@
-@import url('../../utils/colors.css');
+@import url('../../globals.css');
 
 .modalContent{
     position: fixed;
