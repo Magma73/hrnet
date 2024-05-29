@@ -12,23 +12,14 @@ interface SelectItem {
   inputId: string;
   name: string;
   defaultValue: Option | null;
-  onChange: () => void;
+  onChange:  (option: Option | null) => void;
   options: Option[];
   placeholder: string;
 }
 
-///**
-//* Function component SelectComponent - Represents a select input component.
-//* @param {string} htmlFor - The htmlFor attribute of the label.
-// * @param {string} label - The label text for the select input.
-//* @param {string} inputId - The id attribute for the select input.
-//* @param {string} name - The name attribute for the select input.
-//* @param {object} defaultValue - The default selected value for the select input.
-//* @param {function} onChange - The function to handle select input changes.
-//* @param {array} options - The array o   f options for the select input.
-//* @param {string} placeholder - The placeholder text for the select input.
-//* @returns {JSX.Element} The rendered SelectComponent.
-//*/
+/**
+* Function component SelectComponent - Represents a select input component.
+*/
 
 const SelectComponent = ({
   htmlFor,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import TableComponent from "../../components/Table";
+// import TableComponent from "../../components/Table";
 import styles from "./EmployeeList.module.css";
 
 ///**
@@ -11,7 +11,7 @@ const EmployeeList = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Current Employees</h1>
       <main className={styles.main}>
-        <TableComponent />
+        {/* <TableComponent /> */}
         <Link to="/" className={styles.homeLink}>
           Home
         </Link>
