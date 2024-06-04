@@ -2,11 +2,11 @@ import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Home.module.css";
 
-const EmployeeForm = lazy(() => import("../../components/Form"));
-///**
-//* Function component Home - Represent the Home Page
-//* @returns {JSX.Element} The rendered Home component.
-//*/
+const EmployeeForm = lazy(() => import("../../molecules/Form"));
+
+/**
+* Function component Home - Represent the Home Page
+*/
 const Home = () => {
   return (
     <div className={styles.container}>

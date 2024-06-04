@@ -1,15 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface EmployeeInfo {
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  startDate: string;
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  department: string;
+  [key: string]: string
 }
 
 interface EmployeeState {

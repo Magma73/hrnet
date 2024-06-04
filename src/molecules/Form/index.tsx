@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { addEmployeeInfos } from "../../slices/employeeInfos";
 import states from "../../data/states";
 import { store } from "../../store/store";
-import InputWithLabel from "../../components/InputWithLabel";
-import Fieldset from "../../components/Fieldset";
-import DatePickerComponent from "../../components/DatePicker";
-import SelectComponent from "../../components/SelectInput";
+import InputWithLabel from "../../atoms/InputWithLabel";
+import Fieldset from "../../atoms/Fieldset";
+import DatePickerComponent from "../../atoms/DatePicker";
+import SelectComponent from "../../atoms/SelectInput";
 import styles from "./EmployeeForm.module.css";
-// import {Modal} from '@magma73/modal-react-typescript'
-// import { createPortal } from "react-dom";
 
-// const Modal = lazy(() => import("../../components/Modal"));
+const ModalComponent = lazy(() => import("../Modal"));
 
 interface State {
   abbreviation: string;
@@ -23,35 +21,17 @@ interface Option {
   label: string;
 }
 
-// interface Employee {
-//   firstName: string;
-//   lastName: string;
-//   dateOfBirth: Date;
-//   startDate: Date;
-//   street: string;
-//   city: string;
-//   state: string;
-//   zipCode: string;
-//   department: string;
-// }
-///**
-//* Function component Employee Form - Represent the Form Component
-//* @returns {JSX.Element} The rendered Employee Form  component.
-//*/
+/**
+* Function component Employee Form - Represent the Form Component
+*/
 const EmployeeForm = () => {
   const dispatch = useDispatch();
 
   // State variables using useState hook
-  // const [startDateBirth, setStartDateBirth] = useState(null);
-  // const [startDateEntry, setStartDateEntry] = useState<Date | null>(null);
-  // const [selectedOption, setSelectedOption] = useState<Date | null>(null);
-  // const [selectedOptionDepartement, setSelectedOptionDepartement] =
-  //   useState(null);
   const [startDateBirth, setStartDateBirth] = useState<Date | null>(null);
   const [startDateEntry, setStartDateEntry] = useState<Date | null>(null);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [selectedOptionDepartement, setSelectedOptionDepartement] = useState<Option | null>(null);
-
   const [formError, setFormError] = useState("");
 
   // Other constants for date calculations and options
@@ -78,70 +58,23 @@ const EmployeeForm = () => {
   ];
 
   // Functions for the modal
-  // const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  // const openModal = () => {
-  //   setShowModal(true);
-  // };
+  const openModal = () => {
+    setShowModal(true);
+  };
 
-  // const closeModal = () => {
-  //   setShowModal(false);
-  // };
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const data = new FormData(form);
-    console.log("data : ", data);
     const employeeData: { [key: string]: string } = {};
-    console.log("employeeData : ", employeeData);
-    // for (let [key, value] of data.entries()) {
-    //   if (!value.trim()) {
-    //     setFormError(`Please fill out the form`);
-    //     return;
-    //   }
-    //   employeeData[key] = value;
-    // }
-    // for (const [key, value] of data.entries()) {
-    //   let valueAsString: string;
-    //   if (typeof value === "string") {
-    //       valueAsString = value;
-    //   } else if (value instanceof File) {
-    //       valueAsString = value.name;
-    //   } else {
-    //       valueAsString = String(value); 
-    //   }
 
-    //   if (!valueAsString.trim()) {
-    //       setFormError(`Please fill out the form`);
-    //       return;
-    //   }
-    //   employeeData[key] = valueAsString;
-    // }
-
-    // for (const [key, value] of data.entries()) {
-    //   employeeData[key] = value instanceof File ? value.name : value;
-    // }
-  
-    // Créer un nouvel objet Employee en utilisant les données de employeeData
-    // const typedEmployeeData: Employee = {
-    //   firstName: employeeData["first-name"] || "",
-    //   lastName: employeeData["last-name"] || "",
-    //   dateOfBirth: startDateBirth as Date,
-    //   startDate: startDateEntry as Date,
-    //   street: employeeData["street"] || "",
-    //   city: employeeData["city"] || "",
-    //   state: employeeData["state"] || "",
-    //   zipCode: employeeData["zip-code"] || "",
-    //   department: employeeData["department"] || "",
-    // };
-
-    // setFormError("");
-
-    // // Dispatch redux action with employee datas
-    // dispatch(addEmployeeInfos(employeeData));
-    // localStorage.setItem("employeeData", JSON.stringify(store.getState()));
-    // openModal();
+    // Check if the form is valid
     for (const [key, value] of data.entries()) {
       let valueAsString: string;
       if (typeof value === "string") {
@@ -153,32 +86,19 @@ const EmployeeForm = () => {
       }
 
       if (!valueAsString.trim()) {
-          setFormError(`Veuillez remplir le formulaire`);
+          setFormError(`Please fill out the form`);
           return;
       }
       employeeData[key] = valueAsString;
     }
 
-    const typedEmployeeData = {
-      firstName: employeeData["first-name"] || "",
-      lastName: employeeData["last-name"] || "",
-      dateOfBirth: startDateBirth ? startDateBirth.toISOString() : "",
-      startDate: startDateEntry ? startDateEntry.toISOString() : "",
-      street: employeeData["street"] || "",
-      city: employeeData["city"] || "",
-      state: employeeData["state"] || "",
-      zipCode: employeeData["zip-code"] || "",
-      department: employeeData["department"] || "",
-    };
-
+    // Remove the error message if the form is valid
     setFormError("");
 
-    // Envoi de l'action redux avec les données de l'employé
-    dispatch(addEmployeeInfos(typedEmployeeData));
+    // Dispatch redux action with employee datas
+    dispatch(addEmployeeInfos(employeeData));
     localStorage.setItem("employeeData", JSON.stringify(store.getState()));
-    console.log(localStorage);
-    // openModal();
-  
+    openModal();
   };
 
   return (
@@ -209,6 +129,7 @@ const EmployeeForm = () => {
         id="date-of-birth"
         name="date-of-birth"
         minDate={minDate}
+        maxDate={maxDate}
         react-datepicker
         selectedDate={startDateBirth}
         onChange={(date) => setStartDateBirth(date)}
@@ -218,7 +139,7 @@ const EmployeeForm = () => {
         label="Start Date"
         id="start-date"
         name="start-date"
-        minDate={minStartDate}
+        minDate={minStartDate }
         selectedDate={startDateEntry}
         onChange={(date) => setStartDateEntry(date)}
       />
@@ -272,23 +193,9 @@ const EmployeeForm = () => {
         Save
       </button>
 
-
-      {/* {showModal &&
-        createPortal(
-          <Suspense>
-          <Modal
-            onClose={closeModal}
-            customModal={styles.modalContent}
-            customContainerInformations={styles.containerInformations}
-            customTitle={styles.title}
-            customBtnClose={styles.btnClose}
-            customIconClose={styles.picture}
-            title="Employee Created"
-            titleClose="Close"
-          />
-           </Suspense>,
-          document.body
-        )} */}
+      <Suspense fallback={<div>Loading</div>}>
+        <ModalComponent showModal={showModal} closeModal={closeModal} />
+      </Suspense>
 
     </form>
   );
