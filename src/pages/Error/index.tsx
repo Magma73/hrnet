@@ -6,10 +6,9 @@ interface RouteError {
   statusText?: string;
 }
 
-// /**
-//  * Function component Error - Represents an error page component.
-//  * @returns {JSX.Element} The rendered Error component.
-//  */
+/**
+ * Function component Error - Represents an error page component.
+ */
 const ErrorRedirection= () => {
   const error = useRouteError() as RouteError;
   return (
