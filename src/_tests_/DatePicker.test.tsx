@@ -1,7 +1,6 @@
 
-import { screen, render, cleanup, waitFor } from '@testing-library/react';
+import { screen, render, cleanup } from '@testing-library/react';
 import DatePickerComponent from '../atoms/DatePicker';
-import {userEvent} from '@testing-library/user-event';
 afterEach(() => {
     cleanup();
   });
@@ -29,27 +28,13 @@ describe('DatePickerComponent', () => {
         onChange={onChange}
       />
     );
-    const datePickerInput = screen.getByRole('textbox');
-    // await userEvent.type(datePickerInput, selectedDate.toLocaleDateString());
-
-    // Wait for asynchronous updates (if necessary)
-    // await waitFor(() => expect(onChange).toHaveBeenCalled());
-
+    
     const datePickerComponent = screen.getByLabelText('Start Date');
     expect(datePickerComponent).toBeInTheDocument();
-      
-    // const labelElement = screen.getByLabelText(label);
-    // expect(labelElement).toBeInTheDocument();
-    // expect(datePickerInput).toHaveAttribute('htmlFor', htmlFor);
 
-    // const datePickerInput = screen.getByRole('textbox');
-    expect(datePickerInput).toBeInTheDocument();
-    // expect(inputElement).toHaveAttribute('htmlFor', htmlFor);
+    const datePickerInput = screen.getByRole('textbox');
     expect(datePickerInput).toHaveAttribute('id', id);
     expect(datePickerInput).toHaveAttribute('name', name);
-    // expect(datePickerInput).toHaveAttribute('selectedDate', selectedDate);
     expect(datePickerInput.value).toBe('04/30/2024');
-
   });
-  
 });

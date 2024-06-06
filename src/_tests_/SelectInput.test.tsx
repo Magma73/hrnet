@@ -1,6 +1,5 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import SelectComponent from '../atoms/SelectInput';
-import { fireEvent } from '@testing-library/react';
 afterEach(() => {
   cleanup();
 });
