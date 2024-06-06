@@ -1,5 +1,6 @@
 import { render, screen, cleanup } from '@testing-library/react';
 import SelectComponent from '../atoms/SelectInput';
+import { fireEvent } from '@testing-library/react';
 afterEach(() => {
   cleanup();
 });
@@ -14,15 +15,18 @@ describe('Given I use the SelectComponent Component in my App', () => {
         { value: 'Human Resources', label: 'Human Resources' },
         { value: 'Legal', label: 'Legal' },
       ];
+      const onChange = vi.fn();
+      const newOption = [{ value : 'Legal', label: 'Legal' }];
+      console.log(newOption[0]);
 
-      render(
+       render(
         <SelectComponent
           htmlFor="department"
           label="Department"
           inputId="department"
           name="department"
           defaultValue={options[0]}
-          onChange={() => {}}
+          onChange={onChange}
           options={options}
           placeholder="Sales"
         />
@@ -39,7 +43,10 @@ describe('Given I use the SelectComponent Component in my App', () => {
       expect(inputRole).toHaveAttribute('type', 'text');
 
       const inputPlaceholder = screen.getByDisplayValue('Sales');
-      expect(inputPlaceholder).toBeInTheDocument();
+      expect(inputPlaceholder).toBeInTheDocument();      
+
+      fireEvent.change(inputRole, { target: { value: options[3].value } });
+      expect(inputRole.value).toBe(options[3].value);
     });
   });
 });
