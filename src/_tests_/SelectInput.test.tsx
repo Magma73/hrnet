@@ -45,7 +45,7 @@ describe('Given I use the SelectComponent Component in my App', () => {
       expect(inputPlaceholder).toBeInTheDocument();      
 
       fireEvent.change(inputRole, { target: { value: options[3].value } });
-      expect(inputRole.value).toBe(options[3].value);
+      expect(inputRole).toHaveValue(options[3].value);
     });
   });
 });

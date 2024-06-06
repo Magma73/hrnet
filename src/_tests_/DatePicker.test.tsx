@@ -35,6 +35,6 @@ describe('DatePickerComponent', () => {
     const datePickerInput = screen.getByRole('textbox');
     expect(datePickerInput).toHaveAttribute('id', id);
     expect(datePickerInput).toHaveAttribute('name', name);
-    expect(datePickerInput.value).toBe('04/30/2024');
+    expect(datePickerInput).toHaveValue('04/30/2024');
   });
 });
