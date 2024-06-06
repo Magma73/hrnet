@@ -194,7 +194,7 @@ const EmployeeForm = () => {
       </button>
 
       <Suspense fallback={<div>Loading</div>}>
-        <ModalComponent showModal={showModal} closeModal={closeModal} />
+        <ModalComponent showModal={showModal} closeModal={closeModal}/>
       </Suspense>
 
     </form>

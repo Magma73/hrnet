@@ -6,12 +6,9 @@ interface FieldsetItem {
   children: ReactNode;
 }
 
-///**
-//* Function component Fieldset - Represent the Fieldset Component
-//* @param {string} legend - The legend of the fieldset.
-//* @param {ReactNode} children - The children components to be rendered inside the fieldset.
-//* @returns {JSX.Element} The rendered Fieldset component.
-//*/
+/**
+* Function component Fieldset - Represent the Fieldset Component
+*/
 
 const Fieldset = ({ legend, children } : FieldsetItem) => {
   return (

@@ -10,17 +10,9 @@ interface DebouncedInputItem {
   testId: string;
 }
 
-///**
-//* Function for input with debounce for value change.
-//* @param {object} props - The component properties.
-//* @param {*} props.value - The initial value of the input.
-//* @param {string} props.id - The ID of the associated label element.
-//* @param {string} props.htmlFor - The ID of the element to which the label is associated.
-//* @param {string} props.label - The label text.
-//* @param {function} props.onChange - The callback function called when a new value is entered.
-//* @param {number} [props.debounce=500] - The delay (in milliseconds) before the value change is propagated.
-//* @returns {JSX.Element} - The input component with debounce.
-//*/
+/**
+* Function for input with debounce for value change.
+*/
 
 const DebouncedInput = ({
   value: initialValue,

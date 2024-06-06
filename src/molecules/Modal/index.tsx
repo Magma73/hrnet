@@ -1,4 +1,3 @@
-import React from 'react';
 import { createPortal } from 'react-dom';
 import {Modal} from '@magma73/modal-react-typescript';
 import styles from './Modal.module.css'; 
