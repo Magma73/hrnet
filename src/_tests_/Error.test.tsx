@@ -1,59 +1,40 @@
-import { render, screen, cleanup } from '@testing-library/react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import Error from '../pages/Error';
 
-afterEach(() => {
-  cleanup();
+// Mock the useRouteError hook
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
+  return {
+    ...actual,
+    useRouteError: () => ({
+      status: 404,
+      statusText: 'Not Found',
+    }),
+  };
 });
 
-describe('Given I visit the application', () => {
-  describe('When the Home page is not found', () => {
-    test('Then, it should render the error page', async () => {
-      const router = createBrowserRouter([
-        {
-          path: '/home',
-          element: null, // Render nothing to simulate Home page not found
-          errorElement: <Error />, // Render the Error page component
-        },
-      ]);
+describe('Given there is an error redirection', () => {
+  test('Then, it should render error information and a link to the home page', () => {
+    // Render the ErrorRedirection component within a BrowserRouter
+    render(
+      <BrowserRouter>
+        <Error />
+      </BrowserRouter>
+    );
 
-      render(
-        <RouterProvider router={router} fallbackElement={<p>Loading...</p>}/>
-      );
+    // Check that the error title is rendered
+    const mainHeading = screen.getByRole('heading', { level: 1 });
+    expect(mainHeading).toBeInTheDocument();
+    expect(mainHeading).toHaveTextContent('Error Page');
 
-      // Check for the title to Home Page
-      const mainHeading = screen.getByRole('heading', { level: 1 });
-      expect(mainHeading).toBeInTheDocument();
-      expect(mainHeading).toHaveTextContent('Error Page');
+    // Check that the error details are rendered
+    const errorDetails = screen.getByText(/Error 404 Not Found/i);
+    expect(errorDetails).toBeInTheDocument();
 
-      // Check for the link to Home Page
-      const viewHomePageLink = screen.getByRole('link', { name: /Back to Home Page/i });
-      expect(viewHomePageLink).toBeInTheDocument();
-      expect(viewHomePageLink).toHaveAttribute('href', '/');
-    });
-  });
-
-  describe('When the EmployeeList page is not found', () => {
-    test('Then, it should render the error page', async () => {
-      const router = createBrowserRouter([
-        {
-          path: '/employeelist',
-          element: null,
-          errorElement: <Error />,
-        },
-      ]);
-
-      render(
-        <RouterProvider router={router} fallbackElement={<p>Loading...</p>}/>
-      );
-
-      const mainHeading = screen.getByRole('heading', { level: 1 });
-      expect(mainHeading).toBeInTheDocument();
-      expect(mainHeading).toHaveTextContent('Error Page');
-
-      const viewHomePageLink = screen.getByRole('link', { name: /Back to Home Page/i });
-      expect(viewHomePageLink).toBeInTheDocument();
-      expect(viewHomePageLink).toHaveAttribute('href', '/');
-    });
+    // Check for the link to the home page
+    const linkToHome = screen.getByRole('link', { name: /Back to Home Page/i });
+    expect(linkToHome).toBeInTheDocument();
+    expect(linkToHome).toHaveAttribute('href', '/');
   });
 });
