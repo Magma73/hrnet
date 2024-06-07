@@ -13,14 +13,14 @@ interface InputItem {
  * Function component InputWithLabel - Represents an input field with a label.
  */
 
-const InputWithLabel = ({
+const InputWithLabel : React.FC<InputItem> = ({
   htmlFor,
   label,
   id,
   name,
   type,
   autoComplete,
-}: InputItem) => {
+}) => {
   return (
     <div className={styles.container}>
       <label className={styles.label} htmlFor={htmlFor}>

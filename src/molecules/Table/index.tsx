@@ -59,7 +59,7 @@ const formatLabel = (label: string) => {
 /**
  * Function component Table - Represent the Table Component
  */
-const TableComponent = () => {
+const TableComponent : React.FC = () => {
   const [data, setData] = useState<Data[]>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");

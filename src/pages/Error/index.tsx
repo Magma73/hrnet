@@ -9,7 +9,7 @@ interface RouteError {
 /**
  * Function component Error - Represents an error page component.
  */
-const ErrorRedirection= () => {
+const ErrorRedirection : React.FC = () => {
   const error = useRouteError() as RouteError;
   return (
     <div>

@@ -14,7 +14,7 @@ interface DebouncedInputItem {
 * Function for input with debounce for value change.
 */
 
-const DebouncedInput = ({
+const DebouncedInput : React.FC <DebouncedInputItem> = ({
   value: initialValue,
   id,
   htmlFor,
@@ -23,7 +23,7 @@ const DebouncedInput = ({
   debounce = 500,
   testId,
   ...props
-}: DebouncedInputItem) => {
+}) => {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import styles from "./EmployeeList.module.css";
 /**
 * Function component EmployeeList - Represent the EmployeeList Page
 */
-const EmployeeList = () => {
+const EmployeeList : React.FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Current Employees</h1>

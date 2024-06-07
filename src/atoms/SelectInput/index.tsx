@@ -21,7 +21,7 @@ interface SelectItem {
 * Function component SelectComponent - Represents a select input component.
 */
 
-const SelectComponent = ({
+const SelectComponent : React.FC<SelectItem> = ({
   htmlFor,
   label,
   inputId,
@@ -30,7 +30,7 @@ const SelectComponent = ({
   onChange,
   options,
   placeholder,
-} : SelectItem) => {
+}) => {
   return (
     <div className={styles.container}>
       <label className={styles.label} htmlFor={htmlFor}>

@@ -24,11 +24,13 @@ interface Option {
 /**
 * Function component Employee Form - Represent the Form Component
 */
-const EmployeeForm = () => {
+const EmployeeForm : React.FC = () => {
   const dispatch = useDispatch();
 
   // State variables using useState hook
   const [startDateBirth, setStartDateBirth] = useState<Date | null>(null);
+  console.log(startDateBirth);
+  console.log(typeof startDateBirth);
   const [startDateEntry, setStartDateEntry] = useState<Date | null>(null);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [selectedOptionDepartement, setSelectedOptionDepartement] = useState<Option | null>(null);

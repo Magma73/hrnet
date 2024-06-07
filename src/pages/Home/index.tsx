@@ -7,7 +7,7 @@ const EmployeeForm = lazy(() => import("../../molecules/Form"));
 /**
 * Function component Home - Represent the Home Page
 */
-const Home = () => {
+const Home : React.FC = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles.h1} aria-level={1}>

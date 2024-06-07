@@ -17,7 +17,7 @@ interface DatePickerItem {
  * Function component DatePickerComponent - Represents a date picker component.
  */
 
-const DatePickerComponent = ({
+const DatePickerComponent: React.FC<DatePickerItem> = ({
   htmlFor,
   label,
   id,
@@ -26,7 +26,7 @@ const DatePickerComponent = ({
   maxDate,
   selectedDate,
   onChange,
-}: DatePickerItem) => {
+}) => {
   return (
     <div className={styles.container}>
       <label className={styles.label} htmlFor={htmlFor}>

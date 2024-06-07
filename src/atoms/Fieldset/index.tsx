@@ -10,7 +10,7 @@ interface FieldsetItem {
 * Function component Fieldset - Represent the Fieldset Component
 */
 
-const Fieldset = ({ legend, children } : FieldsetItem) => {
+const Fieldset : React.FC<FieldsetItem> = ({ legend, children } ) => {
   return (
     <fieldset className={styles.fieldset}>
       <legend>{legend}</legend>
