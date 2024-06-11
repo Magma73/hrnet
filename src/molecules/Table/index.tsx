@@ -96,9 +96,6 @@ const TableComponent : React.FC = () => {
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
-    debugTable: true,
-    debugHeaders: true,
-    debugColumns: true,
   });
 
   return (
