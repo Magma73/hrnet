@@ -1,8 +1,15 @@
-import { MemoryRouter } from "react-router-dom";
-import { screen, cleanup, render, waitFor } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import {
+  screen,
+  cleanup,
+  render,
+  waitFor,
+  fireEvent,
+} from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 import Home from "../pages/Home";
+import EmployeeList from "../pages/EmployeeList";
 
 afterEach(() => {
   cleanup();
@@ -10,9 +17,12 @@ afterEach(() => {
 
 beforeEach(() => {
   render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={["/"]}>
       <Provider store={store}>
-        <Home />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/employeelist" element={<EmployeeList />} />
+        </Routes>
       </Provider>
     </MemoryRouter>
   );
@@ -86,7 +96,15 @@ describe("Given I visit the application and I am on the Home Page", () => {
 
       const formFieldsComboBox = screen.getAllByRole("combobox");
       expect(formFieldsComboBox.length).toBe(2);
-
+    });
+    describe("When I click on link 'View Current Employees'", () => {
+      test("Then it should render the EmployeeList page", async () => {
+        const linkElement = screen.getByRole("link");
+        expect(linkElement).toHaveTextContent("View Current Employees");
+        fireEvent.click(linkElement);
+        const title1 = screen.getByRole("heading", { level: 1 });
+        expect(title1).toHaveTextContent("Current Employees");
+      });
     });
   });
 });

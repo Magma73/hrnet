@@ -1,8 +1,15 @@
-import { Suspense } from "react";
-import { MemoryRouter } from "react-router-dom";
-import { screen, cleanup, render, waitFor } from "@testing-library/react";
+// import { Suspense } from "react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import {
+  screen,
+  cleanup,
+  render,
+  waitFor,
+  fireEvent,
+} from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
+import Home from "../pages/Home";
 import EmployeeList from "../pages/EmployeeList";
 
 afterEach(() => {
@@ -11,11 +18,12 @@ afterEach(() => {
 
 beforeEach(() => {
   render(
-    <MemoryRouter>
+    <MemoryRouter initialEntries={["/employeelist"]}>
       <Provider store={store}>
-        <Suspense>
-          <EmployeeList />
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/employeelist" element={<EmployeeList />} />
+        </Routes>
       </Provider>
     </MemoryRouter>
   );
@@ -55,6 +63,15 @@ describe("Given I visit the application and I am on the EmployeeList Page", () =
       expect(screen.getByText("Showing 1 to 10 of 20")).toBeInTheDocument();
       expect(screen.getByText("Previous")).toBeInTheDocument();
       expect(screen.getByText("Next")).toBeInTheDocument();
+    });
+  });
+  describe("When I click on link 'Home'", () => {
+    test("Then it should render the Home page", async () => {
+      const linkElement = screen.getByRole("link");
+      expect(linkElement).toHaveTextContent("Home");
+      fireEvent.click(linkElement);
+      const title1 = screen.getByRole("heading", { level: 1 });
+      expect(title1).toHaveTextContent("HR Net");
     });
   });
 });
