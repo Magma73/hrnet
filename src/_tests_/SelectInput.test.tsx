@@ -15,8 +15,6 @@ describe('Given I use the SelectComponent Component in my App', () => {
         { value: 'Legal', label: 'Legal' },
       ];
       const onChange = vi.fn();
-      const newOption = [{ value : 'Legal', label: 'Legal' }];
-      console.log(newOption[0]);
 
        render(
         <SelectComponent

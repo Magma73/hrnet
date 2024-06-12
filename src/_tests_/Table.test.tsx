@@ -1,5 +1,4 @@
 import { render, fireEvent, screen, cleanup, act } from "@testing-library/react";
-// import { Suspense } from "react";
 import TableComponent from "../molecules/Table";
 
 afterEach(() => {
@@ -7,9 +6,7 @@ afterEach(() => {
 });
 
 beforeEach(() => {
-  render(
-  <TableComponent/>
-);
+    render(<TableComponent />);
 });
 
 describe("Given I use the Table Component in my App", () => {
@@ -45,13 +42,14 @@ describe("Given I use the Table Component in my App", () => {
       expect(screen.getByText("Yoyo")).toBeInTheDocument();
     });
 
-    test("Then, it should sort the table when a column header is clicked", () => {
+    test("Then, it should sort the table when a column header is clicked", async () => {
       const header = screen.getByText("First name");
-      act(() => {
+      await act(async () => {
         fireEvent.click(header);
       });
       const arrowIcon = screen.getAllByTestId("arrow-icon");
-      expect(arrowIcon[0]).toHaveTextContent("🔼");
+        expect(arrowIcon[0]).toHaveTextContent("🔼");
+
     });
 
     test("Then, it should paginate the table when the page size is changed", () => {

@@ -86,6 +86,7 @@ describe("Given I visit the application and I am on the Home Page", () => {
 
       const formFieldsComboBox = screen.getAllByRole("combobox");
       expect(formFieldsComboBox.length).toBe(2);
+
     });
   });
 });

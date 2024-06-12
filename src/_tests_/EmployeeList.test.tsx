@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { screen, cleanup, render, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
@@ -12,7 +13,9 @@ beforeEach(() => {
   render(
     <MemoryRouter>
       <Provider store={store}>
-        <EmployeeList />
+        <Suspense>
+          <EmployeeList />
+        </Suspense>
       </Provider>
     </MemoryRouter>
   );

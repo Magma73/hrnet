@@ -8,6 +8,7 @@ import {
   cleanup,
   waitFor,
 } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import EmployeeForm from "../molecules/Form";
 
 afterEach(() => {
@@ -100,6 +101,10 @@ describe("Given I am on the Home Page", () => {
       expect(screen.getByLabelText("State")).toHaveValue("Alaska");
       expect(screen.getByLabelText("Zip Code")).toHaveValue(Number(12345));
       expect(screen.getByLabelText("Department")).toHaveValue("Marketing");
+      
+      const buttonElement = screen.getByRole("button");
+      userEvent.click(buttonElement);
+      expect(screen.queryByText(/Please fill out the form/i)).toBeNull();
     });
   });
 });

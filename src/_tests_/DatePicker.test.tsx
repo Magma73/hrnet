@@ -13,7 +13,7 @@ describe('DatePickerComponent', () => {
     const name = 'datePickerInput';
     const minDate = new Date(2024, 3, 1);
     const maxDate = new Date(2024, 3, 30);
-    const selectedDate = new Date(2024, 3, 30);
+    const selectedDate = new Date("04/30/2024");
     const onChange = vi.fn();
 
     render(
