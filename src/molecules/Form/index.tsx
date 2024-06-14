@@ -187,7 +187,7 @@ const EmployeeForm : React.FC = () => {
         options={optionsDepartement}
         placeholder="Sales"
       />
-      {formError && <p>{formError}</p>}
+      {formError && <p className={styles.errorMessage}>{formError}</p>}
 
       <button className={styles.btn} type="submit">
         Save
