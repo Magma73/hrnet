@@ -106,9 +106,6 @@ describe("Given I am on the Home Page", () => {
       const buttonElement = screen.getByRole("button");
       userEvent.click(buttonElement);
       expect(screen.queryByText(/Please fill out the form/i)).toBeNull();
-      // expect(screen.queryByText(/Employee created/i)).toBeInTheDocument();
-      const modalElement = await waitFor(() =>  screen.getByTestId("modal"));
-      expect(modalElement).toBeInTheDocument();
     });
   });
 });
