@@ -52,7 +52,7 @@ describe("Given I am on the Home Page", () => {
       expect(formFieldsComboBox.length).toBe(2);
     });
   });
-  describe("When I do not enter form fields", () => {
+  describe("When I do not enter form fields and I submit the form", () => {
     test("Then, it displays an error message", async () => {
       const buttonElement = screen.getByRole("button");
       fireEvent.click(buttonElement);
@@ -63,8 +63,8 @@ describe("Given I am on the Home Page", () => {
       });
     });
   });
-  describe("When I enter form fields", () => {
-    test("Then, it render the form with custom fields", async () => {
+  describe("When I enter form fields and I submit the form", () => {
+    test("Then, it render the form with custom fields and displays the modal", async () => {
       fireEvent.change(screen.getByLabelText("First Name"), {
         target: { value: "John" },
       });
@@ -106,6 +106,9 @@ describe("Given I am on the Home Page", () => {
       const buttonElement = screen.getByRole("button");
       userEvent.click(buttonElement);
       expect(screen.queryByText(/Please fill out the form/i)).toBeNull();
+      // expect(screen.queryByText(/Employee created/i)).toBeInTheDocument();
+      const modalElement = await waitFor(() =>  screen.getByTestId("modal"));
+      expect(modalElement).toBeInTheDocument();
     });
   });
 });

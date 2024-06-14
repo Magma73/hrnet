@@ -1,4 +1,3 @@
-// import { Suspense } from "react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import {
   screen,
