@@ -33,7 +33,7 @@ Dans le détail, les objectifs sont de :
 - React-Redux: V9.1.2
 - React-Router-dom: V6.23.1
 - @reduxjs/toolkit: V2.2.5
-- @magma73/modal-react-typescript: V1.0.3
+- @magma73/modal-react-typescript: V1.0.5
 - @tanstack/react-table: V8.17.3
 - React-datepicker: V6.9.0
 - React-Select: V5.8.0
